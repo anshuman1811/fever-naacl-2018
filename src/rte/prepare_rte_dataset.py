@@ -24,7 +24,7 @@ import json
 
 def process_data(args):
     # path to wiki-dump files
-    path_to_data = arg.wiki_path
+    path_to_data = args.wiki_path
     # collect the names of all wiki files
     json_files = [fname for fname in os.listdir(path_to_data) if fname.startswith('wiki-') and fname.endswith('.jsonl')]
 
