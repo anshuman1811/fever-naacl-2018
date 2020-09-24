@@ -146,7 +146,7 @@ def process_data(args):
 
         for key, data in evidence_dict.items():
             try:
-                output_file.writerow([key, data['verifiable'], data['label'], data['claim'], data['evidence']])
+                out_data.writerow([key, data['verifiable'], data['label'], data['claim'], data['evidence']])
             except KeyError as e:
                 print(e)
                 raise
