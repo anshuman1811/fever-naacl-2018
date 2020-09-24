@@ -5,16 +5,13 @@ from typing import List, Union, Dict, Any
 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-from allennlp.common import Params
-from allennlp.common.tee_logger import TeeLogger
-#from allennlp.common.util import prepare_environment
-from allennlp.data import Vocabulary, Dataset, DataIterator, DatasetReader, Tokenizer, TokenIndexer
-from allennlp.models import Model, archive_model, load_archive
-from allennlp.service.predictors import Predictor
-from allennlp.training import Trainer
-from common.util.log_helper import LogHelper
-from retrieval.fever_doc_db import FeverDocDB
-from rte.parikh.reader import FEVERReader
+import json
+import os
+import csv
+import numpy as np
+from unicodedata import normalize
+from collections import defaultdict
+from random import shuffle
 from tqdm import tqdm
 import argparse
 import logging
