@@ -82,12 +82,10 @@ def process_data(args):
                 evidence_dict[id]['evidence'] = []
 
                 # add all evidence pieces
-                for e in j['evidence']:
-                    for evidence in e:
-                        anno_id = evidence[0]
-                        evidence_id = evidence[1]
-                        article_name = evidence[2]
-                        sentence_id = evidence[3]
+                if label == 0:
+                    for pred_sent in j['predicted_sentences']:
+                        article_name = pred_sent[0]
+                        sentence_id = pred_sent[1]
                         if sentence_id is not None:
                             try:
                                 article_name = normalize('NFC', article_name)
@@ -97,6 +95,22 @@ def process_data(args):
                             except KeyError as e:
                                 print(article_name, ' is not in available evidence.')
                                 pass
+                else:
+                    for e in j['evidence']:
+                        for evidence in e:
+                            anno_id = evidence[0]
+                            evidence_id = evidence[1]
+                            article_name = evidence[2]
+                            sentence_id = evidence[3]
+                            if sentence_id is not None:
+                                try:
+                                    article_name = normalize('NFC', article_name)
+                                    current_sentence = wiki_data[article_name][sentence_id].split('\t')[1]
+                                    if current_sentence not in evidence_dict[id]['evidence']:
+                                        evidence_dict[id]['evidence'].append(current_sentence)
+                                except KeyError as e:
+                                    print(article_name, ' is not in available evidence.')
+                                    pass
 
         # # dictionaries separating data into their categories (supports, refutes, nei)
         # supports_dict = {}
