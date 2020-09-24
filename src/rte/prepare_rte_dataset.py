@@ -56,7 +56,7 @@ def process_data(args):
         # collect evidence ids and pair to wiki_data based on sentence index
         evidence_dict = defaultdict(dict)
         with open(args.in_file) as jreader:
-            for itm in tqdm(jreader):
+            for itm in jreader:
                 j = json.loads(itm)
                 id = str(j['id'])
                 evidence_dict[id] = {}
@@ -83,6 +83,7 @@ def process_data(args):
 
                 # add all evidence pieces
                 if label == 0:
+                    print ("NEI", id, len(j['predicted_sentences']))
                     for pred_sent in j['predicted_sentences']:
                         article_name = pred_sent[0]
                         sentence_id = pred_sent[1]
