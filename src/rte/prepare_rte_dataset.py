@@ -20,7 +20,7 @@ import json
 import numpy as np
 import json
 
-logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
+# logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 def process_data(args):
     # path to wiki-dump files
@@ -56,7 +56,7 @@ def process_data(args):
         # collect evidence ids and pair to wiki_data based on sentence index
         evidence_dict = defaultdict(dict)
         with open(args.in_file) as jreader:
-            for itm in jreader:
+            for itm in tqdm(jreader):
                 j = json.loads(itm)
                 id = str(j['id'])
                 evidence_dict[id] = {}
@@ -153,9 +153,9 @@ def process_data(args):
         
 
 if __name__ == "__main__":
-    LogHelper.setup()
-    LogHelper.get_logger("allennlp.training.trainer")
-    LogHelper.get_logger(__name__)
+    # LogHelper.setup()
+    # LogHelper.get_logger("allennlp.training.trainer")
+    # LogHelper.get_logger(__name__)
 
 
     parser = argparse.ArgumentParser()
